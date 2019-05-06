@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="{% static "app_one/css/index.css" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-    <h1 class="headline">Dojo Reads</h1>
+<body class="bodyStyle">
+    
     <div class="container">
-        <div class="row"><h2>Login and Registration</h2></div>
+        <h1 class="headline spotlight">Dojo Reads</h1>
+        <div class="row "><h2 class="headline">Login and Registration</h2></div>
         {% if messages %}
             {% for message in messages %}
                 {% if "out" in message.tags %}

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static "app_one/css/index.css" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body class="bodyStyle">
     
     <div class="container">
         <div class="navigation">
@@ -23,15 +23,20 @@
         </div>
         <div class="row">
             <div class="col">
+                <div class="spotlight">
                 <h5>{{book.title}}</h5>
                 <p>Author: <a href="/authors/{{book.author.id}}">{{book.author.name}}</a></p>
+            </div>
                 <br>
                 <h5>Reviews:</h5>
                 <hr>
                 {% for review in reviews %}
-                <h5>Rating: {{review.rating}} Stars</h5>
-                <a href="/users/{{review.poster.id}}">{{review.poster.alias}}</a> says: <span class="font-italic">{{review.review}}</span>
-                <br>
+                <div class="reviewBox">
+                    <a href="/users/{{review.poster.id}}">{{review.poster.alias}}</a> says: <span class="font-italic">{{review.review}}</span>
+                    <br>
+                    <br>
+                    {% load static %}
+                    <p>Rating: <img class="stars" src='/static/app_one/images/{{review.rating}}.png'></p>
                 <p><span class="font-italic">Posted on {{review.created_at}}</span></p>
                     {% if request.session.user == review.poster.id %}
                     <form action="/delete" method="post">
@@ -41,8 +46,9 @@
                         <input type="submit" class="btn-danger" value="Delete">                    
                     </form>
                     {% endif %}
-                <hr>
+                </div>
                 {% endfor %}
+            
             </div>
             <div class="col">
                 <p>Add a Review:</p>
@@ -57,7 +63,7 @@
                             <option value="5">5</option>
                     </select>stars</p></p>
                     <input type="hidden" name="source" value="{{book.id}}">
-                    <input type="submit" value="Submit Review">
+                    <input type="submit" class="btn btn-primary" value="Submit Review">
                 </form>
             </div>
         </div>

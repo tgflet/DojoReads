@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Books Home</title>
-    {% load static %}
+    
     {% load static %}
     <link rel="stylesheet" href="{% static "app_one/css/index.css" %}">
     <style>
@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-<body>
+<body class="bodyStyle">
     <div class="container">
         <div class="row">
             <div class="col ">
@@ -25,15 +25,15 @@
                 <h6>Recent Book Reviews:</h6>
                 <hr>
                 {% for review in reviews|slice:":3" %}
-                <div>
+                <div class=reviewBox>
                     <h5><a href="books/{{review.subject.id}}">{{review.subject.title}}</a></h5>
-                    <p>Rating: {{review.rating}} Stars</p>
+                    {% load static %}
+                    <p>Rating: <img class="stars" src='/static/app_one/images/{{review.rating}}.png'></p>
                     <p><a href="users/{{review.poster.id}}">{{review.poster.alias}}</a> says: 
                     
                     <span class="font-italic">{{review.review}}</span>
                     </p>
                     <p>{{review.created_at}}</p>
-                    <hr>
                 </div>
                 {% endfor %}
             </div>
@@ -42,7 +42,8 @@
                 <p></p>
                 <p></p>
                 <h6>Books with Reviews:</h6>
-                <div class="booklist">
+                <hr>
+                <div class="booklist reviewBox">
                     {% for book in books %}
                         <p><a href="books/{{book.id}}">{{book.title}}</a></p>
                     {% endfor %}

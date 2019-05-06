@@ -9,14 +9,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
-    <a href="/books">Home</a>|<a href="/logout">Logout</a>
-    <h4>Add a New Book Title and a Review</h4>
+<body class="bodyStyle">
     <div class="container">
+        <div class="navigation">
+            <a href="/books">Home</a>|<a href="/logout">Logout</a>
+        </div>
+            <h4>Add a New Book Title and a Review</h4>
         <form action="/add" method="post">
+            <fieldset class="spotlight">
             {% csrf_token %}
             
-            <p>Book Title: <input type="text" name="title"></p>
+            
+            <p>Book Title: <input type="text" name="title">
+                {% if messages %}
+                {% for message in messages %}
+                    
+                    <span class="text-danger">&nbsp;{{message}}</span>
+                    
+                {% endfor %}
+            {% endif %} </p>
             <p>Author:</p>
             {% if messages %}
                 {% for message in messages %}
@@ -32,7 +43,8 @@
                     {% endfor %}
             </select></p>
             <p>Or add a new author: <input type="text" name="new"></p>
-            <p>Review: <textarea name="text" id="" cols="30" rows="10"></textarea></p>
+            <p>Review:</p>
+             <textarea name="text" id="" cols="45" rows="10"></textarea>
             <p>Rating: <select name="rating">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -41,6 +53,7 @@
                     <option value="5">5</option>
             </select>stars</p>
             <input type="submit" value="Add Book and Review">
+        </fieldset>
         </form>
     </div>
 </body>

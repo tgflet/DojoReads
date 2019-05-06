@@ -79,9 +79,13 @@ def add_book(request):
         messages.error(request, 'You must be logged in to access site',extra_tags="out")
         return redirect('/')
 def add(request):
-    if len(request.POST['new'])<1:
-        author=Author.objects.get(id=request.POST['existing'])
-        
+    errors=Book.objects.book_validator(request.POST)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request,value,extra_tags =key)
+        return redirect('/books/add')
+    elif len(request.POST['new'])<1:
+        author=Author.objects.get(id=request.POST['existing'])    
     else:
         author=Author.objects.create(name = request.POST['new'])
         
