@@ -11,15 +11,20 @@
             width:200px;
         }
     </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "app_one/css/index.css" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <a href="/books">Home</a> | {{user.alias}} <a href="/logout">Logout</a>
+    
     <div class="container">
+        <div class="navigation">
+                {{user.alias}}&nbsp;| <a href="/books">Home</a>  | &nbsp;<a href="/logout">Logout</a>
+        </div>
         <div class="row">
             <div class="col">
                 <h5>{{book.title}}</h5>
-                <p>Author: {{book.author.name}}</p>
+                <p>Author: <a href="/authors/{{book.author.id}}">{{book.author.name}}</a></p>
                 <br>
                 <h5>Reviews:</h5>
                 <hr>

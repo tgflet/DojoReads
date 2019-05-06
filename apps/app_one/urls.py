@@ -14,4 +14,5 @@ urlpatterns=[
     path('review',views.review),
     path('users/<num>',views.user),
     path('delete',views.destroy),
+    path('authors/<num>',views.author),
 ]

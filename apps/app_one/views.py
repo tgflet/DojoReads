@@ -138,3 +138,27 @@ def user(request,num):
     else:
         messages.error(request, 'You must be logged in to access site',extra_tags="out")
         return redirect('/')
+def author(request,num):
+    if 'user' in request.session:
+        number=int(num)
+        user=User.objects.get(id=request.session['user'])
+        author=Author.objects.get(id=number)
+        books=Book.objects.filter(author=author)
+
+        # select_reviews=Review.objects.filter(subject=books).order_by('-created_at')
+        book_total=0
+        print(books)
+        for i in books:
+            book_total +=1
+            
+        context={
+            "profile":user,
+            # "reviews":select_reviews,
+            "book_total":book_total,
+            "author":author,
+            "books":books
+        }
+        return render(request, 'app_one/author.html',context)
+    else:
+        messages.error(request, 'You must be logged in to access site',extra_tags="out")
+        return redirect('/')

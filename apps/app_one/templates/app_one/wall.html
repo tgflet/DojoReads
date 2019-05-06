@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Books Home</title>
     {% load static %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "app_one/css/index.css" %}">
     <style>
         .stars{
             width:200px;
@@ -16,7 +18,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col ">
                 <h4>Welcome, {{profile.alias}}</h4>
                 <p></p>
                 <p></p>
@@ -40,7 +42,7 @@
                 <p></p>
                 <p></p>
                 <h6>Books with Reviews:</h6>
-                <div>
+                <div class="booklist">
                     {% for book in books %}
                         <p><a href="books/{{book.id}}">{{book.title}}</a></p>
                     {% endfor %}
